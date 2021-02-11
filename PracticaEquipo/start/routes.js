@@ -15,5 +15,15 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
+//Ruta para loguear
+Route.post('/Login', 'AuthController.Login')
+//Ruta para guardar user
+//Metodo resource genera todas las rutas
+Route.resource('/Registro', 'UsuarioController')
+            .apiOnly()
+            .validator(new Map([
+                [['users.store'],['RegistroUser']]
+            ]))
 
+//Especificar validador para cada ruta
 Route.on('/').render('welcome')
