@@ -44,6 +44,16 @@ class ProductoController {
         return  response.json({"Comentarios":comentarios,"Producto":product.Nombre})
 
     }
+
+    async show({request,params, response}){
+        if (params.id == ''){
+            const product= await products.all()
+            return response.json({"Productos":product,"params":params.id})
+        }else{
+            const product= await products.find(params.id)
+            return response.json({"Productos":product,"params":params.id})
+        }
+    }
 }
 
 module.exports = ProductoController

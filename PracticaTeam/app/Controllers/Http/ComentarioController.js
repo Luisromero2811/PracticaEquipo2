@@ -11,6 +11,28 @@ class ComentarioController {
         return response.json({
             "Se ha agregado un comentario nuevo:" : comentario})
     }
+ /*    async EliminarComments(request,response,params){
+        return params.com
+        const comentario = await coments.find(params.id)
+
+        if(comentario){
+            await comentario.delete()
+            response.status(200).json({"message":'Comentario eliminado....',
+            "comentario":comentario})
+        }else{
+            response.status(403).json({"message":"No se encontro el comentario..."})
+        }
+        
+    } */
+    async EliminarComments(request, response, params){
+        const comentario = await coments.find(params.id)
+        if(comentario){
+            await comentario.delete()
+            response.status(200).json({"message":'Comentario Eliminado',"comentario":comentario})
+        }else{
+            response.status(403).json({"message":"No se encontraron comentarios"})
+        }
+    }
 }
 
 module.exports = ComentarioController

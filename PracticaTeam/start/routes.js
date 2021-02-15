@@ -31,11 +31,16 @@ Route.put('Actualizaruser/:id', 'CrudPersonaController.Actualizar')
 Route.delete('Eliminaruser/:id', 'CrudPersonaController.Eliminar')
 //Muestra Usuario con comentarios
 Route.get('User/:id/comentarios','CrudPersonaController.Mostrar').middleware('auth')
+//Eliminar comentarios
+Route.delete('Eliminarcomments/:id','ComentarioController.EliminarComments')
 //Muestra Usuario con sus productos
 Route.get('Usuario/:id/comentarios','CrudPersonaController.Mostraruser').middleware('auth')
 //CRUD Articulos
+//Mostrar Articulos
+Route.get('Productos/:id?','ProductoController.show')
 Route.post('Registrarprod', 'ProductoController.Insertar').middleware('auth')
 Route.put('Actualizarprod/:id', 'ProductoController.Actualizar')
+//Esta eliminando el producto que aún no esta referenciado
 Route.delete('Eliminarprod/:id', 'ProductoController.Eliminar')
 //Comentarios
 Route.post('Insertarcoment/:producto', 'ComentarioController.Guardar').middleware('auth')
@@ -44,3 +49,4 @@ Route.get('Producto/:id/comentarios','ProductoController.Mostrar')
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
+//3 Rutas, Muestre productos (todos o por parametros), eliminar el comentario, que usuario hizo el producto

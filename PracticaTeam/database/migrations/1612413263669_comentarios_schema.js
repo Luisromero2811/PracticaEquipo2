@@ -9,7 +9,7 @@ class ComentariosSchema extends Schema {
       table.increments()
       table.string('Comentario',254)
       table.integer('user_id').unsigned().references('id').inTable('users')
-      table.integer('producto_id').unsigned().references('id').inTable('productos')    
+      table.integer('producto_id').unsigned().references('id').inTable('productos')
       table.timestamps()
     })
   }
