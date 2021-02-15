@@ -1,5 +1,6 @@
 'use strict'
 const products= use('App/Models/Producto')
+const coments= use('App/Models/Comentario')
 
 class ProductoController {
     //Crud para articulos-productos
@@ -27,15 +28,7 @@ class ProductoController {
         producto.Caducidad=data.Caducidad
         await producto.save()
         return response.json({"producto":producto,"params":params})
-    }
-    async Eliminar({response, params}){
-        const { id } = params
-            const product = await products.find(id)
-            await product.delete()
-            return response.json({
-                "Se ha eliminado satisfactoriamente el articulo:" : product
-            })
-    }
+    }​​​
     async Mostrar({response,params}){
         //Mostrar Productos con todos sus comentarios
         const product= await products.find(params.id)
@@ -44,7 +37,6 @@ class ProductoController {
         return  response.json({"Comentarios":comentarios,"Producto":product.Nombre})
 
     }
-
     async show({request,params, response}){
         if (params.id == ''){
             const product= await products.all()

@@ -1,6 +1,16 @@
 'use strict'
 const coments= use('App/Models/Comentario')
+const products= use('App/Models/Producto')
 class ComentarioController {
+    async EliminarComments({request, response, params}){
+        //const {id} = params
+           const comentario = await coments.find(params.id)
+           //return params.id
+           await comentario.delete()
+               return response.json({
+                   "Se ha eliminado satisfactoriamente el comentario:" : comentario
+               })
+       }
     async Guardar({response, request,params,auth}){
         const data = request.only(['Comentario'])   
         const comentario = new coments()
@@ -11,35 +21,21 @@ class ComentarioController {
         return response.json({
             "Se ha agregado un comentario nuevo:" : comentario})
     }
- /*    async EliminarComments(request,response,params){
-        return params.com
-        const comentario = await coments.find(params.id)
-
-        if(comentario){
-            await comentario.delete()
-            response.status(200).json({"message":'Comentario eliminado....',
-            "comentario":comentario})
+    async Eliminar({response,params}){
+        const producto= await products.find(params.id)
+        if(producto){
+            const comentario= await coments
+            .query()
+            .where('producto_id','=',params.id)
+            .delete()
+            await producto.delete()
+            return response.json({"Se ha eliminado correctamente el producto":producto})
         }else{
-            response.status(403).json({"message":"No se encontro el comentario..."})
+            return response.json({"message":"No se ha encontrado un producto"})
         }
-        
-    } */
-    async EliminarComments(request, response, params){
-        const comentario = await coments.find(params.id)
-        if(comentario){
-            await comentario.delete()
-            response.status(200).json({"message":'Comentario Eliminado',"comentario":comentario})
-        }else{
-            response.status(403).json({"message":"No se encontraron comentarios"})
         }
-    }
 }
-
 module.exports = ComentarioController
-/* const data = request.only(['Nombre','Caducidad'])
-        const producto=await products.find(params.id)
-        producto.Nombre=data.Nombre
-        producto.Caducidad=data.Caducidad
-        await producto.save()
-        return response.json({"producto":producto,"params":params})
- */
+//const { id } = params
+//const product = await products.find(id)
+        

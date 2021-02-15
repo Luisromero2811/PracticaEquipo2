@@ -41,7 +41,7 @@ Route.get('Productos/:id?','ProductoController.show')
 Route.post('Registrarprod', 'ProductoController.Insertar').middleware('auth')
 Route.put('Actualizarprod/:id', 'ProductoController.Actualizar')
 //Esta eliminando el producto que aún no esta referenciado
-Route.delete('Eliminarprod/:id', 'ProductoController.Eliminar')
+Route.delete('Eliminarprod/:id', 'ComentarioController.Eliminar')
 //Comentarios
 Route.post('Insertarcoment/:producto', 'ComentarioController.Guardar').middleware('auth')
 Route.get('Producto/:id/comentarios','ProductoController.Mostrar')
